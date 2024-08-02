@@ -2,6 +2,7 @@ import numpy as np
 import torch
 import torchvision.transforms as transforms
 import os
+import wandb
 
 from dataclasses import dataclass, field
 from typing import Optional
@@ -76,13 +77,23 @@ def compute_metrics(eval_pred):
     return {"accuracy": accuracy, "precision": precision, "recall": recall, "f1": f1}
 
 def main(hubPath, hubModel):
+    wandb.login(key="e68d14a1a7b3aed71e0455589cde53c783018f5a")
+    wandb.init(project="t5spiders")
+    
     os.environ["HUGGINGFACE_TOKEN"] = "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"
-    #model_checkpoint = "google/vit-base-patch16-224"  # Updated model checkpoint
+    
     model_checkpoint = hubModel
-    batch_size = 64
+    batch_size = 16
 
-    #dataset = load_dataset(hubPath)
-    dataset = load_dataset("imagefolder", data_dir=hubPath)
+    wandb.config.update({
+        "model_checkpoint": model_checkpoint,
+        "batch_size": batch_size,
+        "learning_rate": 5e-5,
+        "num_train_epochs": 5,
+    })
+
+    dataset = load_dataset(hubPath)
+    #dataset = load_dataset("imagefolder", data_dir=hubPath)
 
     if torch.backends.mps.is_available():
         device = torch.device("mps")
@@ -182,7 +193,8 @@ def main(hubPath, hubModel):
         warmup_ratio=0.1,
         logging_steps=10,
         load_best_model_at_end=True,
-        metric_for_best_model="accuracy"
+        metric_for_best_model="accuracy",
+        report_to="wandb"
     )
 
     trainer = Trainer(
@@ -216,9 +228,11 @@ def main(hubPath, hubModel):
     trainer.log_metrics("eval", metrics)
     trainer.save_metrics("eval", metrics)
 
+    wandb.finish()
     return None
 
 if __name__ == "__main__":
     set_seed(42)
     args = parse_HF_args()
     main(args.dataset, args.model)
+    #main("zkdeng/t5spiders-1000", "facebook/convnextv2-tiny-22k-384")
