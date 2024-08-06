@@ -1,0 +1,146 @@
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/condabin/conda
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/bin/conda
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/bin/conda-env
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/bin/activate
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/bin/deactivate
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/etc/profile.d/conda.sh
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/etc/fish/conf.d/conda.fish
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/shell/condabin/Conda.psm1
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/shell/condabin/conda-hook.ps1
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/lib/python3.9/site-packages/xontrib/conda.xsh
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/etc/profile.d/conda.csh
+no change     /home/u21/zkdeng/.bashrc
+No action taken.
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/condabin/conda
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/bin/conda
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/bin/conda-env
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/bin/activate
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/bin/deactivate
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/etc/profile.d/conda.sh
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/etc/fish/conf.d/conda.fish
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/shell/condabin/Conda.psm1
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/shell/condabin/conda-hook.ps1
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/lib/python3.9/site-packages/xontrib/conda.xsh
+no change     /opt/ohpc/pub/apps/anaconda/2022.05/etc/profile.d/conda.csh
+no change     /home/u21/zkdeng/.bashrc
+No action taken.
+wandb: Currently logged in as: zkdeng (zkdeng-university-of-arizona). Use `wandb login --relogin` to force relogin
+wandb: Appending key for api.wandb.ai to your netrc file: /home/u21/zkdeng/.netrc
+wandb: Tracking run with wandb version 0.17.5
+wandb: Run data is saved locally in /xdisk/nirav/zkdeng/SpiderML/wandb/run-20240805_180937-717gdfi1
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run faithful-mountain-5
+wandb: ⭐️ View project at https://wandb.ai/zkdeng-university-of-arizona/t5spiders
+wandb: 🚀 View run at https://wandb.ai/zkdeng-university-of-arizona/t5spiders/runs/717gdfi1
+Some weights of ConvNextV2ForImageClassification were not initialized from the model checkpoint at facebook/convnextv2-tiny-22k-384 and are newly initialized because the shapes did not match:
+- classifier.weight: found shape torch.Size([1000, 768]) in the checkpoint and torch.Size([5, 768]) in the model instantiated
+- classifier.bias: found shape torch.Size([1000]) in the checkpoint and torch.Size([5]) in the model instantiated
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+cuda
+  0%|          | 0/30 [00:00<?, ?it/s]  3%|▎         | 1/30 [00:03<01:41,  3.51s/it]  7%|▋         | 2/30 [00:06<01:24,  3.02s/it] 10%|█         | 3/30 [00:08<01:17,  2.86s/it] 13%|█▎        | 4/30 [00:11<01:12,  2.79s/it] 17%|█▋        | 5/30 [00:14<01:08,  2.74s/it] 20%|██        | 6/30 [00:16<01:04,  2.70s/it]
+  0%|          | 0/4 [00:00<?, ?it/s][A
+ 50%|█████     | 2/4 [00:00<00:00,  6.28it/s][A
+ 75%|███████▌  | 3/4 [00:00<00:00,  6.00it/s][A/xdisk/nirav/zkdeng/SpiderML/scripts/huggingFaceTemplate.py:66: FutureWarning: load_metric is deprecated and will be removed in the next major version of datasets. Use 'evaluate.load' instead, from the new library 🤗 Evaluate: https://huggingface.co/docs/evaluate
+  metric1 = load_metric("accuracy")
+                                              
+                                             [A 20%|██        | 6/30 [00:21<01:04,  2.70s/it]
+100%|██████████| 4/4 [00:03<00:00,  6.00it/s][A
+                                             [A 23%|██▎       | 7/30 [00:24<01:38,  4.28s/it] 27%|██▋       | 8/30 [00:27<01:22,  3.77s/it] 30%|███       | 9/30 [00:29<01:11,  3.43s/it] 33%|███▎      | 10/30 [00:32<01:03,  3.19s/it]                                                33%|███▎      | 10/30 [00:32<01:03,  3.19s/it] 37%|███▋      | 11/30 [00:35<00:57,  3.03s/it] 40%|████      | 12/30 [00:37<00:52,  2.91s/it]{'eval_loss': 1.1803159713745117, 'eval_accuracy': 0.68, 'eval_precision': 0.6789160839160839, 'eval_recall': 0.6868831168831169, 'eval_f1': 0.6750754604872251, 'eval_runtime': 3.7843, 'eval_samples_per_second': 13.212, 'eval_steps_per_second': 1.057, 'epoch': 0.96}
+{'loss': 1.3235, 'learning_rate': 3.7037037037037037e-05, 'epoch': 1.6}
+
+  0%|          | 0/4 [00:00<?, ?it/s][A
+ 50%|█████     | 2/4 [00:00<00:00,  6.85it/s][A
+ 75%|███████▌  | 3/4 [00:00<00:00,  6.29it/s][A                                               
+                                             [A 40%|████      | 12/30 [00:41<00:52,  2.91s/it]
+100%|██████████| 4/4 [00:02<00:00,  6.29it/s][A
+                                             [A 43%|████▎     | 13/30 [00:43<01:06,  3.92s/it] 47%|████▋     | 14/30 [00:46<00:56,  3.54s/it] 50%|█████     | 15/30 [00:49<00:49,  3.28s/it] 53%|█████▎    | 16/30 [00:51<00:43,  3.09s/it] 57%|█████▋    | 17/30 [00:54<00:38,  2.96s/it] 60%|██████    | 18/30 [00:57<00:34,  2.87s/it]{'eval_loss': 0.7862006425857544, 'eval_accuracy': 0.84, 'eval_precision': 0.8603030303030303, 'eval_recall': 0.856969696969697, 'eval_f1': 0.8387969924812031, 'eval_runtime': 2.5966, 'eval_samples_per_second': 19.256, 'eval_steps_per_second': 1.54, 'epoch': 1.92}
+
+  0%|          | 0/4 [00:00<?, ?it/s][A
+ 50%|█████     | 2/4 [00:00<00:00,  6.83it/s][A
+ 75%|███████▌  | 3/4 [00:00<00:00,  6.37it/s][A                                               
+                                             [A 60%|██████    | 18/30 [01:01<00:34,  2.87s/it]
+100%|██████████| 4/4 [00:02<00:00,  6.37it/s][A
+                                             [A 63%|██████▎   | 19/30 [01:03<00:42,  3.88s/it] 67%|██████▋   | 20/30 [01:06<00:35,  3.51s/it]                                                67%|██████▋   | 20/30 [01:06<00:35,  3.51s/it] 70%|███████   | 21/30 [01:08<00:29,  3.25s/it] 73%|███████▎  | 22/30 [01:11<00:24,  3.08s/it] 77%|███████▋  | 23/30 [01:14<00:20,  2.95s/it] 80%|████████  | 24/30 [01:16<00:17,  2.87s/it] 83%|████████▎ | 25/30 [01:19<00:13,  2.73s/it]{'eval_loss': 0.5749024748802185, 'eval_accuracy': 0.9, 'eval_precision': 0.9034848484848486, 'eval_recall': 0.9103030303030304, 'eval_f1': 0.9023978919631095, 'eval_runtime': 2.5718, 'eval_samples_per_second': 19.441, 'eval_steps_per_second': 1.555, 'epoch': 2.88}
+{'loss': 0.6609, 'learning_rate': 1.8518518518518518e-05, 'epoch': 3.2}
+
+  0%|          | 0/4 [00:00<?, ?it/s][A
+ 50%|█████     | 2/4 [00:00<00:00,  6.21it/s][A
+ 75%|███████▌  | 3/4 [00:00<00:00,  5.96it/s][A                                               
+                                             [A 83%|████████▎ | 25/30 [01:21<00:13,  2.73s/it]
+100%|██████████| 4/4 [00:02<00:00,  5.96it/s][A
+                                             [A 87%|████████▋ | 26/30 [01:25<00:15,  3.92s/it] 90%|█████████ | 27/30 [01:28<00:10,  3.54s/it] 93%|█████████▎| 28/30 [01:31<00:06,  3.27s/it] 97%|█████████▋| 29/30 [01:33<00:03,  3.09s/it]100%|██████████| 30/30 [01:36<00:00,  2.97s/it]                                               100%|██████████| 30/30 [01:36<00:00,  2.97s/it]{'eval_loss': 0.47980958223342896, 'eval_accuracy': 0.9, 'eval_precision': 0.9034848484848486, 'eval_recall': 0.9103030303030304, 'eval_f1': 0.9023978919631095, 'eval_runtime': 2.775, 'eval_samples_per_second': 18.018, 'eval_steps_per_second': 1.441, 'epoch': 4.0}
+{'loss': 0.43, 'learning_rate': 0.0, 'epoch': 4.8}
+
+  0%|          | 0/4 [00:00<?, ?it/s][A
+ 50%|█████     | 2/4 [00:00<00:00,  6.22it/s][A
+ 75%|███████▌  | 3/4 [00:00<00:00,  5.97it/s][A                                               
+                                             [A100%|██████████| 30/30 [01:39<00:00,  2.97s/it]
+100%|██████████| 4/4 [00:02<00:00,  5.97it/s][A
+                                             [A                                               100%|██████████| 30/30 [01:40<00:00,  2.97s/it]100%|██████████| 30/30 [01:40<00:00,  3.34s/it]
+{'eval_loss': 0.4612489938735962, 'eval_accuracy': 0.9, 'eval_precision': 0.9034848484848486, 'eval_recall': 0.9103030303030304, 'eval_f1': 0.9023978919631095, 'eval_runtime': 2.6547, 'eval_samples_per_second': 18.834, 'eval_steps_per_second': 1.507, 'epoch': 4.8}
+{'train_runtime': 100.3437, 'train_samples_per_second': 19.782, 'train_steps_per_second': 0.299, 'train_loss': 0.8048010508219401, 'epoch': 4.8}
+***** train metrics *****
+  epoch                    =        4.8
+  train_loss               =     0.8048
+  train_runtime            = 0:01:40.34
+  train_samples_per_second =     19.782
+  train_steps_per_second   =      0.299
+  0%|          | 0/4 [00:00<?, ?it/s] 50%|█████     | 2/4 [00:00<00:00,  6.95it/s] 75%|███████▌  | 3/4 [00:00<00:00,  6.46it/s]100%|██████████| 4/4 [00:02<00:00,  1.85it/s]
+wandb: - 0.004 MB of 0.004 MB uploadedwandb: \ 0.004 MB of 0.004 MB uploadedwandb: | 0.030 MB of 0.050 MB uploadedwandb: / 0.030 MB of 0.050 MB uploadedwandb: - 0.050 MB of 0.050 MB uploadedwandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:                  eval/accuracy ▁▆████
+wandb:                        eval/f1 ▁▆████
+wandb:                      eval/loss █▄▂▁▁▁
+wandb:                 eval/precision ▁▇████
+wandb:                    eval/recall ▁▆███▇
+wandb:                   eval/runtime █▁▁▂▁▁
+wandb:        eval/samples_per_second ▁██▆▇█
+wandb:          eval/steps_per_second ▁██▆▇█
+wandb:                    train/epoch ▁▂▃▅▅▇███
+wandb:              train/global_step ▂▃▄▅▆▇███▁
+wandb:            train/learning_rate █▅▁
+wandb:                     train/loss █▃▁
+wandb:               train/total_flos ▁
+wandb:               train/train_loss ▁
+wandb:            train/train_runtime ▁
+wandb: train/train_samples_per_second ▁
+wandb:   train/train_steps_per_second ▁
+wandb: 
+wandb: Run summary:
+wandb:                  eval/accuracy 0.9
+wandb:                        eval/f1 0.88797
+wandb:                      eval/loss 0.49174
+wandb:                 eval/precision 0.90198
+wandb:                    eval/recall 0.88889
+wandb:                   eval/runtime 2.605
+wandb:        eval/samples_per_second 19.194
+wandb:          eval/steps_per_second 1.536
+wandb:                    train/epoch 4.8
+wandb:              train/global_step 0
+wandb:            train/learning_rate 0.0
+wandb:                     train/loss 0.43
+wandb:               train/total_flos 1.4114178534172262e+17
+wandb:               train/train_loss 0.8048
+wandb:            train/train_runtime 100.3437
+wandb: train/train_samples_per_second 19.782
+wandb:   train/train_steps_per_second 0.299
+wandb: 
+wandb: 🚀 View run faithful-mountain-5 at: https://wandb.ai/zkdeng-university-of-arizona/t5spiders/runs/717gdfi1
+wandb: ⭐️ View project at: https://wandb.ai/zkdeng-university-of-arizona/t5spiders
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240805_180937-717gdfi1/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+***** eval metrics *****
+  eval_accuracy           =        0.9
+  eval_f1                 =      0.888
+  eval_loss               =     0.4917
+  eval_precision          =      0.902
+  eval_recall             =     0.8889
+  eval_runtime            = 0:00:02.60
+  eval_samples_per_second =     19.194
+  eval_steps_per_second   =      1.536
+
+real	2m59.928s
+user	1m19.640s
+sys	0m29.528s

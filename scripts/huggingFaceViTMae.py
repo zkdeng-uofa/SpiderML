@@ -102,8 +102,8 @@ def main(hubPath, hubModel):
     batch_size = 16
 
     # Load dataset
-    # dataset = load_dataset("imagefolder", data_dir=hubPath)
-    dataset = load_dataset(hubPath)
+    dataset = load_dataset("imagefolder", data_dir='training')
+    #dataset = load_dataset(hubPath)
 
     if torch.backends.mps.is_available():
         device = torch.device("mps")
@@ -195,7 +195,7 @@ def main(hubPath, hubModel):
         per_device_train_batch_size=batch_size,
         gradient_accumulation_steps=4,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=5,
+        num_train_epochs=10,
         warmup_ratio=0.1,
         logging_steps=10,
         load_best_model_at_end=True,

@@ -161,9 +161,11 @@ cython_debug/
 
 training
 vit-mae-large-finetuned-zkdeng/
-spiderTraining.csv
 spiderTraining100.csv
 spider_urls.csv
 convnextv2-tiny-22k-384-finetuned-zkdeng/
 training100/
 wandb/
+models
+SLURM/out
+
