@@ -181,7 +181,7 @@ def main(hubPath, hubModel):
     model_name = model_checkpoint.split("/")[-1]
 
     args = TrainingArguments(
-        f"{model_name}-finetuned-{hubPath}",
+        f"{model_name}-finetuned-{hubPath.split('/')[-1]}",
         remove_unused_columns=False,
         evaluation_strategy = "epoch",
         save_strategy = "epoch",

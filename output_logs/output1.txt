@@ -1,0 +1,12 @@
+Standard Output: Completed with 0 errors.
+
+Standard Error: 
+  0%|          | 0/10000 [00:00<?, ?it/s]
+ 97%|█████████▋| 9658/10000 [00:00<00:00, 91405.19it/s]
+100%|██████████| 10000/10000 [00:02<00:00, 3835.55it/s]
+
+Return Code: 0
+Token will not been saved to git credential helper. Pass `add_to_git_credential=True` if you want to set the git credential as well.
+Token is valid (permission: fineGrained).
+Your token has been saved to /home/u21/zkdeng/.cache/huggingface/token
+Login successful

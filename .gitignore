@@ -168,4 +168,5 @@ training100/
 wandb/
 models
 SLURM/out
+data
 

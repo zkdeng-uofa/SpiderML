@@ -1,56 +1,65 @@
-from huggingface_hub import HfApi, Repository, login
+import pandas as pd
+import sqlite3
 import os
-import csv
+import subprocess
+import argparse
+from datasets import load_dataset
+from huggingface_hub import login
 
-# Replace with your Hugging Face credentials
-hf_token = "your_hugging_face_api_token"
-repo_name = "your_username/your_dataset_name"
-local_dir = "path_to_your_local_dataset_directory"
-csv_file_path = "path_to_your_csv_file.csv"
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
 
-# Log in to Hugging Face Hub
-login(token=hf_token)
+    parser.add_argument(
+        "--numSpecies",
+        type=str
+    )
+    parser.add_argument(
+        "--numImages",
+        type=str
+    )
+    return parser.parse_args()
 
-# Create the dataset repository
-api = HfApi()
-api.create_repo(repo_id=repo_name, repo_type="dataset", exist_ok=True)
+def main():
+    args = parse_args()
 
-# Clone the repository to a local directory
-repo = Repository(local_dir=local_dir, clone_from=repo_name)
+    numSpecies = args.numSpecies
+    numImages = args.numImages
+    datasetName = f'spiderTraining{numSpecies}-{numImages}'
+    hf_token = "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"
+    repo_name = "zkdeng/t5spiders"
 
-# Prepare the README file
-readme_content = f"""# {repo_name.split('/')[-1]}
+    spidersDF = pd.read_csv("../data/csvs/spider_urls.csv")
+    countDf = spidersDF.groupby('taxon_name').size().reset_index(name='count').sort_values(by='count', ascending=False)
+    topSpecies = countDf[0:int(numSpecies)]
+    filteredDf = spidersDF[spidersDF['taxon_name'].isin(topSpecies['taxon_name'])]
+    spiderTrainDf = filteredDf.groupby('taxon_name').apply(lambda x: x.head(int(numImages))).reset_index(drop=True)
 
-## Description
-A brief description of the dataset.
+    spiderTrainDf.to_csv(f"../data/csvs/{datasetName}.csv")
 
-## Structure
-- **data/class1/**: Images belonging to class 1.
-- **data/class2/**: Images belonging to class 2.
-- **labels.csv**: Contains class labels and image URLs.
+    # Define the command as a list of arguments
+    command = [
+            "python", "ImgDownload.py",
+            "--input_path", f"../data/csvs/{datasetName}.csv",
+            "--output_folder", f"../data/imgs/{datasetName}",
+            "--url_column", "photo_url",
+            "--name_column", "taxon_name"
+    ]
 
-## Usage
-Instructions on how to use the dataset.
-"""
-with open(os.path.join(local_dir, "README.md"), "w") as readme_file:
-    readme_file.write(readme_content)
+    # Execute the command
+    result = subprocess.run(command, capture_output=True, text=True)
 
-# Prepare the dataset structure
-# Ensure the CSV file paths match the local directory structure
-with open(csv_file_path, newline='') as csvfile:
-    reader = csv.reader(csvfile)
-    headers = next(reader)  # Assuming the first row is the header
-    for row in reader:
-        image_url, class_label = row
-        # Perform any necessary operations on image_url and class_label
-        # For example, downloading the image or verifying the path
+    # Print the output and error, if any
+    print("Standard Output:", result.stdout)
+    print("Standard Error:", result.stderr)
+    print("Return Code:", result.returncode)
 
-# Add all files and push to the repository
-repo.git_add(auto_lfs_track=True)  # auto_lfs_track=True for handling large files
-repo.git_commit("Initial commit")
-repo.git_push()
+    login(token=hf_token)
 
-# Optionally, set the repository visibility to public
-api.update_repo_visibility(repo_id=repo_name, private=False)
+    dataset = load_dataset("imagefolder", data_dir=f'../data/imgs/{datasetName}')
 
-print(f"Dataset {repo_name} uploaded successfully.")
+    dataset.push_to_hub(f'zkdeng/{datasetName}')
+
+if __name__ == "__main__":
+    main()
+
+
