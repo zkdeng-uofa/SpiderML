@@ -3,6 +3,8 @@ import torch
 import torchvision.transforms as transforms
 import os
 import wandb
+import json
+import argparse  # **Added to handle command line arguments**
 
 from dataclasses import dataclass, field
 from typing import Optional
@@ -40,14 +42,35 @@ class ScriptTrainingArguments:
         default=None,
         metadata={"help": "Name of model from HG hub"}
     )
+    learning_rate: float = field(  # **Added learning_rate to the dataclass**
+        default=5e-5,
+        metadata={"help": "Learning rate for training"}
+    )
+    num_train_epochs: int = field(  # **Added num_train_epochs to the dataclass**
+        default=5,
+        metadata={"help": "Number of training epochs"}
+    )
+    batch_size: int = field(
+        default=16,
+        metadata={"help": "Batch size of training epochs"}
+    )
 
 def parse_HF_args():
     """
-    Parse hugging face arguments from the command line
+    Parse hugging face arguments from a JSON file
     """
-    parser = HfArgumentParser(ScriptTrainingArguments)
-    [script_args] = parser.parse_args_into_dataclasses()
-    return script_args
+    # **Added argparse to handle the JSON file path as a command line argument**
+    parser = argparse.ArgumentParser(description="Run Hugging Face model with JSON config")
+    parser.add_argument("--config", type=str, required=True, help="Path to the config JSON file")
+    args = parser.parse_args()
+
+    # **Load the JSON file specified by the command line argument**
+    with open(args.config, 'r') as f:
+        json_args = json.load(f)
+    
+    hf_parser = HfArgumentParser(ScriptTrainingArguments)
+    script_args = hf_parser.parse_dict(json_args)
+    return script_args[0]  # **Returns the parsed arguments**
 
 def collate_fn(examples):
     """
@@ -76,24 +99,23 @@ def compute_metrics(eval_pred):
     f1 = metric4.compute(predictions=predictions, references=labels, average="macro")["f1"]
     return {"accuracy": accuracy, "precision": precision, "recall": recall, "f1": f1}
 
-def main(hubPath, hubModel):
+def main(script_args):  # **Updated to take script_args as input**
     wandb.login(key="e68d14a1a7b3aed71e0455589cde53c783018f5a")
-    wandb.init(project="t5spiders")
+    wandb.init(project="spidersML")
     
     os.environ["HUGGINGFACE_TOKEN"] = "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"
     
-    model_checkpoint = hubModel
-    batch_size = 16
+    model_checkpoint = script_args.model
+    batch_size = script_args.batch_size
 
     wandb.config.update({
         "model_checkpoint": model_checkpoint,
         "batch_size": batch_size,
-        "learning_rate": 5e-5,
-        "num_train_epochs": 5,
+        "learning_rate": script_args.learning_rate,  # **Updated to use value from JSON**
+        "num_train_epochs": script_args.num_train_epochs,  # **Updated to use value from JSON**
     })
 
-    dataset = load_dataset(hubPath)
-    #dataset = load_dataset("imagefolder", data_dir=hubPath)
+    dataset = load_dataset(script_args.dataset)
 
     if torch.backends.mps.is_available():
         device = torch.device("mps")
@@ -181,15 +203,15 @@ def main(hubPath, hubModel):
     model_name = model_checkpoint.split("/")[-1]
 
     args = TrainingArguments(
-        f"{model_name}-finetuned-{hubPath.split('/')[-1]}",
+        f"{script_args.num_train_epochs}-{model_name}-finetuned-{script_args.dataset.split('/')[-1]}",  # **Updated to use dataset from JSON**
         remove_unused_columns=False,
         evaluation_strategy = "epoch",
         save_strategy = "epoch",
-        learning_rate=5e-5,
+        learning_rate=script_args.learning_rate,  # **Updated to use value from JSON**
         per_device_train_batch_size=batch_size,
         gradient_accumulation_steps=4,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=5,
+        num_train_epochs=script_args.num_train_epochs,  # **Updated to use value from JSON**
         warmup_ratio=0.1,
         logging_steps=10,
         load_best_model_at_end=True,
@@ -236,6 +258,5 @@ def main(hubPath, hubModel):
 
 if __name__ == "__main__":
     set_seed(42)
-    args = parse_HF_args()
-    main(args.dataset, args.model)
-    #main("zkdeng/t5spiders-1000", "facebook/convnextv2-tiny-22k-384")
+    args = parse_HF_args()  # **Updated to use JSON-based arguments**
+    main(args)

@@ -19,7 +19,7 @@
 ### REQUIRED. Set the memory required for this job.
 #SBATCH --mem=16gb
 ### REQUIRED. Specify the time required for this job, hhh:mm:ss
-#SBATCH --time=48:00:00
+#SBATCH --time=96:00:00
 #SBATCH --gres=gpu:volta:4
 
 # --------------------------------------------------------------
@@ -27,28 +27,21 @@
 # --------------------------------------------------------------
 ### Load required modules/libraries if needed
 module load python/3.9
-#module load aws
-#module load nextflow
 source ~/.bashrc
-### change to your scripts directory
 conda init bash
 conda init
 conda activate spiders
 
 # Function to display help message
 usage() {
-    echo "Usage: $0 -s numSpecies -i numImages -m MODEL"
+    echo "Usage: $0 -c config.json"
     exit 1
 }
 
 # Parse command-line arguments
-while getopts ":s:i:m:" opt; do
+while getopts ":c:" opt; do
   case $opt in
-    s) numSpecies="$OPTARG"
-    ;;
-    i) numImages="$OPTARG"
-    ;;
-    m) MODEL="$OPTARG"
+    c) config_path="$OPTARG"
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
         usage
@@ -59,13 +52,10 @@ while getopts ":s:i:m:" opt; do
   esac
 done
 
-# Check if the required arguments are provided
-if [ -z "$numSpecies" ] || [ -z "$numImages" ] || [ -z "$MODEL" ]; then
+# Check if the required argument is provided
+if [ -z "$config_path" ]; then
     usage
 fi
-
-# Construct the dataset string
-DATASET="zkdeng/spiderTraining${numSpecies}-${numImages}"
 
 cd /xdisk/nirav/zkdeng/SpiderML/scripts
 
@@ -75,9 +65,9 @@ export MASTER_ADDR="localhost"
 export MASTER_PORT=12345
 
 ### Run your work
-#time python datasetUpload.py --numSpecies "$numSpecies" --numImages "$numImages"
-time torchrun huggingFaceTemplate.py --dataset "$DATASET" --model "$MODEL"
+time torchrun huggingFaceJSON.py --config "$config_path"
 
-mv "${MODEL##*/}-finetuned-${DATASET##*/}" ../models/
+# Move the fine-tuned model to the models directory
+mv "*-finetuned-*" ../models/
 
 sleep 10
