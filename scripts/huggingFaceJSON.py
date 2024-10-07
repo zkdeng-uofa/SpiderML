@@ -2,7 +2,6 @@ import numpy as np
 import torch
 import torchvision.transforms as transforms
 import os
-import wandb
 import json
 import argparse  # **Added to handle command line arguments**
 
@@ -100,20 +99,20 @@ def compute_metrics(eval_pred):
     return {"accuracy": accuracy, "precision": precision, "recall": recall, "f1": f1}
 
 def main(script_args):  # **Updated to take script_args as input**
-    wandb.login(key="e68d14a1a7b3aed71e0455589cde53c783018f5a")
-    wandb.init(project="spidersML")
+    # wandb.login(key="e68d14a1a7b3aed71e0455589cde53c783018f5a")
+    # wandb.init(project="spidersML")
     
     os.environ["HUGGINGFACE_TOKEN"] = "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"
     
     model_checkpoint = script_args.model
     batch_size = script_args.batch_size
 
-    wandb.config.update({
-        "model_checkpoint": model_checkpoint,
-        "batch_size": batch_size,
-        "learning_rate": script_args.learning_rate,  # **Updated to use value from JSON**
-        "num_train_epochs": script_args.num_train_epochs,  # **Updated to use value from JSON**
-    })
+    # wandb.config.update({
+    #     "model_checkpoint": model_checkpoint,
+    #     "batch_size": batch_size,
+    #     "learning_rate": script_args.learning_rate,  # **Updated to use value from JSON**
+    #     "num_train_epochs": script_args.num_train_epochs,  # **Updated to use value from JSON**
+    # })
 
     dataset = load_dataset(script_args.dataset)
 
@@ -216,10 +215,8 @@ def main(script_args):  # **Updated to take script_args as input**
         logging_steps=10,
         load_best_model_at_end=True,
         metric_for_best_model="accuracy",
-        report_to="wandb",
-        push_to_hub=True,
-        hub_token="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",
-        local_rank=os.getenv('LOCAL_RANK', -1)
+        #report_to="wandb",
+        push_to_hub=False
     )
 
     trainer = Trainer(

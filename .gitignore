@@ -169,4 +169,4 @@ wandb/
 models
 SLURM/out
 data
-
+output_logs

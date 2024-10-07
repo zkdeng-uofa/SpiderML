@@ -1,0 +1,7 @@
+{
+    "dataset": "zkdeng/spiderTraining5-100",
+    "model": "facebook/convnextv2-tiny-22k-384",
+    "learning_rate": 5e-4,
+    "num_train_epochs":5,
+    "batch_size":27
+}
