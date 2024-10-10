@@ -93,18 +93,24 @@ def compute_metrics(eval_pred):
     f1 = metric4.compute(predictions=predictions, references=labels, average="macro")["f1"]
     return {"accuracy": accuracy, "precision": precision, "recall": recall, "f1": f1}
 
-def raise_keyboard_exception():
-    """
-    Raises a timeout exception to stop the training.
-    """
-    raise KeyboardInterrupt
 
-def try_training_with_batch_size(script_args, train_ds, val_ds, model, image_processor, batch_size, device):
+def try_training_with_batch_size(script_args, train_ds, val_ds, test_ds, model, image_processor, batch_size, device):
     """
     Attempts to train with the given batch size and returns success or failure.
+    Handles OutOfMemoryError by reducing the batch size.
     """
     try:
         print(f"Trying with batch size: {batch_size}")
+
+        # Initialize W&B before each retry attempt
+        wandb.init(project="spidersML", reinit=True)
+        wandb.config.update({
+            "model_checkpoint": script_args.model,
+            "batch_size": batch_size,
+            "learning_rate": script_args.learning_rate,
+            "num_train_epochs": script_args.num_train_epochs,
+        })
+
         args = TrainingArguments(
             output_dir=f"{script_args.num_train_epochs}-finetuned-{script_args.dataset.split('/')[-1]}",
             remove_unused_columns=False,
@@ -114,12 +120,13 @@ def try_training_with_batch_size(script_args, train_ds, val_ds, model, image_pro
             per_device_train_batch_size=batch_size,
             gradient_accumulation_steps=4,
             per_device_eval_batch_size=batch_size,
-            num_train_epochs=1,
+            num_train_epochs=script_args.num_train_epochs,
             warmup_ratio=0.1,
             logging_steps=10,
             load_best_model_at_end=True,
             metric_for_best_model="accuracy",
-            push_to_hub=False
+            report_to="wandb",  # Report directly to W&B during each retry
+            push_to_hub=True  # Push to Hugging Face Hub
         )
 
         trainer = Trainer(
@@ -132,30 +139,39 @@ def try_training_with_batch_size(script_args, train_ds, val_ds, model, image_pro
             data_collator=collate_fn,
         )
 
-        # Start a timer to enforce the 30-second limit
-        timeout = 60  # 30 seconds
-        timer = threading.Timer(timeout, raise_keyboard_exception)
-        timer.start()
+        # Start training
+        train_results = trainer.train()
+        trainer.save_model()
+        trainer.log_metrics("train", train_results.metrics)
+        trainer.save_metrics("train", train_results.metrics)
+        trainer.save_state()
 
-        # Test training
-        trainer.train()
-        timer.cancel() 
+        trainer = Trainer(
+            model,
+            args,
+            train_dataset=train_ds,
+            eval_dataset=test_ds,
+            tokenizer=image_processor,
+            compute_metrics=compute_metrics,
+            data_collator=collate_fn,
+        )
+
+        metrics = trainer.evaluate()
+        trainer.log_metrics("eval", metrics)
+        trainer.save_metrics("eval", metrics)
+
+        wandb.finish()
         return True  # Training successful
-    
-    except KeyboardInterrupt as e:
-        print(f"Size Found, Training stopped: {e}")
-        timer.cancel()
-        return True  # Training failed due to timeout
-    
-    except:
-        timer.cancel()
+
+    except RuntimeError:
         print(f"Out of memory with batch size {batch_size}, reducing batch size.")
         torch.cuda.empty_cache()  # Clear GPU memory cache to free memory
+        wandb.finish()  # Finish logging for this attempt, even if it failed
         return False  # Training failed due to OOM
 
 
 def main(script_args):
-    os.environ["HUGGINGFACE_TOKEN"] = "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"
+    os.environ["HUGGINGFACE_TOKEN"] = "your_huggingface_token"
     
     model_checkpoint = script_args.model
     dataset = load_dataset(script_args.dataset)
@@ -173,30 +189,23 @@ def main(script_args):
 
     image_processor = AutoImageProcessor.from_pretrained(model_checkpoint)
     normalize = Normalize(mean=image_processor.image_mean, std=image_processor.image_std)
-    if "height" in image_processor.size:
-        size = (image_processor.size["height"], image_processor.size["width"])
-        crop_size = size
-        max_size = None
-    elif "shortest_edge" in image_processor.size:
-        size = image_processor.size["shortest_edge"]
-        crop_size = (size, size)
-        max_size = image_processor.size.get("longest_edge")
-        
-    train_transforms = Compose([RandomResizedCrop(crop_size), RandomHorizontalFlip(), ToTensor(), normalize])
-    val_transforms = Compose([Resize(size), CenterCrop(crop_size), ToTensor(), normalize])
-    test_transforms = Compose([Resize(size), CenterCrop(crop_size), ToTensor(), normalize,
-    ])
+    size = (image_processor.size["height"], image_processor.size["width"]) if "height" in image_processor.size else (image_processor.size["shortest_edge"], image_processor.size["shortest_edge"])
+    
+    train_transforms = Compose([RandomResizedCrop(size), RandomHorizontalFlip(), ToTensor(), normalize])
+    val_transforms = Compose([Resize(size), CenterCrop(size), ToTensor(), normalize])
+    test_transforms = Compose([Resize(size), CenterCrop(size), ToTensor(), normalize])
 
     def preprocess_train(example_batch):
         example_batch["pixel_values"] = [train_transforms(image.convert("RGB")) for image in example_batch["image"]]
         return example_batch
+
     def preprocess_val(example_batch):
         example_batch["pixel_values"] = [val_transforms(image.convert("RGB")) for image in example_batch["image"]]
         return example_batch
+
     def preprocess_test(example_batch):
         example_batch["pixel_values"] = [test_transforms(image.convert("RGB")) for image in example_batch["image"]]
         return example_batch
-
 
     splits1 = dataset["train"].train_test_split(test_size=0.2)
     splits2 = splits1["test"].train_test_split(test_size=0.5)
@@ -204,6 +213,7 @@ def main(script_args):
 
     train_ds.set_transform(preprocess_train)
     val_ds.set_transform(preprocess_val)
+    test_ds.set_transform(preprocess_test)
 
     model = AutoModelForImageClassification.from_pretrained(
         model_checkpoint,
@@ -214,11 +224,10 @@ def main(script_args):
     model.to(device)
 
     # Loop through batch sizes until one fits in the GPU
-    #batch_size = script_args.batch_size
-    batch_size = 64
+    batch_size = 32 
     successful_training = False
     while batch_size > 0:
-        successful_training = try_training_with_batch_size(script_args, train_ds, val_ds, model, image_processor, batch_size, device)
+        successful_training = try_training_with_batch_size(script_args, train_ds, val_ds, test_ds, model, image_processor, batch_size, device)
         if successful_training:
             break
         batch_size //= 2  # Reduce batch size by half for the next attempt
@@ -227,82 +236,7 @@ def main(script_args):
         print("Failed to find a suitable batch size.")
         return  # Exit if no batch size fits the GPU memory
 
-    # Once correct batch size is found, initialize W&B and push to Hugging Face
     print(f"Training successful with batch size: {batch_size}")
-
-    # Initialize wandb after finding correct batch size
-    wandb.login(key="your_wandb_api_key")
-    wandb.init(project="spidersML")
-
-    # Updating wandb configuration with the found batch size and other details
-    wandb.config.update({
-        "model_checkpoint": model_checkpoint,
-        "batch_size": batch_size,
-        "learning_rate": script_args.learning_rate,
-        "num_train_epochs": script_args.num_train_epochs,
-    })
-
-    model = AutoModelForImageClassification.from_pretrained(
-        model_checkpoint,
-        label2id=label2id,
-        id2label=id2label,
-        ignore_mismatched_sizes=True,
-    )
-    model.to(device)
-
-    # Proceed with the final model training and evaluation
-    final_args = TrainingArguments(
-        output_dir=f"{script_args.num_train_epochs}-finetuned-{script_args.dataset.split('/')[-1]}",
-        remove_unused_columns=False,
-        evaluation_strategy="epoch",
-        save_strategy="epoch",
-        learning_rate=script_args.learning_rate,
-        per_device_train_batch_size=batch_size,
-        gradient_accumulation_steps=4,
-        per_device_eval_batch_size=batch_size,
-        num_train_epochs=script_args.num_train_epochs,
-        warmup_ratio=0.1,
-        logging_steps=10,
-        load_best_model_at_end=True,
-        metric_for_best_model="accuracy",
-        report_to="wandb",  # Now report to W&B
-        push_to_hub=True,  # Push to Hugging Face hub
-    )
-
-    print("Training Batch Size:", batch_size)
-    final_trainer = Trainer(
-        model=model,
-        args=final_args,
-        train_dataset=train_ds,
-        eval_dataset=val_ds,
-        tokenizer=image_processor,
-        compute_metrics=compute_metrics,
-        data_collator=collate_fn,
-    )
-
-    # Final training and evaluation
-    final_train_results = final_trainer.train()
-    final_trainer.save_model()
-    final_trainer.log_metrics("train", final_train_results.metrics)
-    final_trainer.save_metrics("train", final_train_results.metrics)
-    final_trainer.save_state()
-
-    test_ds.set_transform(preprocess_test)
-    final_trainer = Trainer(
-        model,
-        args,
-        train_dataset=train_ds,
-        eval_dataset=test_ds,
-        tokenizer=image_processor,
-        compute_metrics=compute_metrics,
-        data_collator=collate_fn,
-    )
-
-    metrics = final_trainer.evaluate()
-    final_trainer.log_metrics("eval", metrics)
-    final_trainer.save_metrics("eval", metrics)
-
-    wandb.finish()
 
 if __name__ == "__main__":
     set_seed(42)
