@@ -171,6 +171,7 @@ def try_training_with_batch_size(script_args, train_ds, val_ds, test_ds, model, 
 
 
 def main(script_args):
+    
     os.environ["HUGGINGFACE_TOKEN"] = "your_huggingface_token"
     
     model_checkpoint = script_args.model
