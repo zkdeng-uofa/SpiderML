@@ -7,7 +7,8 @@ import argparse  # **Added to handle command line arguments**
 
 from dataclasses import dataclass, field
 from typing import Optional
-from datasets import load_dataset, load_metric
+from datasets import load_dataset
+from evaluate import load as load_metric
 from torch.utils.data import DataLoader, TensorDataset
 
 from torchvision.transforms import (
