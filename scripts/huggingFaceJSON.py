@@ -4,6 +4,7 @@ import torchvision.transforms as transforms
 import os
 import json
 import argparse  # **Added to handle command line arguments**
+import wandb
 
 from dataclasses import dataclass, field
 from typing import Optional
@@ -203,7 +204,7 @@ def main(script_args):  # **Updated to take script_args as input**
     model_name = model_checkpoint.split("/")[-1]
 
     args = TrainingArguments(
-        f"{script_args.num_train_epochs}-{model_name}-finetuned-{script_args.dataset.split('/')[-1]}",  # **Updated to use dataset from JSON**
+        f"output_logs/{script_args.num_train_epochs}-{model_name}-finetuned-{script_args.dataset.split('/')[-1]}",  # **Updated to use dataset from JSON**
         remove_unused_columns=False,
         evaluation_strategy = "epoch",
         save_strategy = "epoch",
