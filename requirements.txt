@@ -1,3 +1,4 @@
+# DEPRECATED: Use `pixi install` instead. See pixi.toml for dependencies.
 pandas
 numpy
 scikit-learn

@@ -1,0 +1,31 @@
+[workspace]
+name = "SpiderML"
+version = "0.1.0"
+description = "Spider species image classification with vision transformers"
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[dependencies]
+python = ">=3.12,<3.13"
+numpy = "*"
+pandas = "*"
+scikit-learn = "*"
+pillow = "*"
+pyarrow = "*"
+c-compiler = "*"
+
+[pypi-dependencies]
+torch = ">=2.6"
+torchvision = ">=0.21"
+transformers = "*"
+datasets = "*"
+accelerate = "*"
+wandb = "*"
+
+[tasks]
+train = "python scripts/huggingFaceTemplate.py --config configs/train_config.json"
+train-freeze = "python scripts/huggingFacePartialFreeze.py --config configs/partial_freeze_config.json"
+train-distill = "python scripts/huggingFaceDistillation.py --config configs/distillation_config.json"
+
+[activation.env]
+PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True"

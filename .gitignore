@@ -170,3 +170,9 @@ models
 SLURM/out
 data
 output_logs
+old
+CLAUDE.md
+memory/
+
+# Pixi
+.pixi/

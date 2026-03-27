@@ -1,7 +1,0 @@
-{
-    "dataset": "zkdeng/spiderTraining5-100",
-    "model": "zkdeng/10-convnextv2-base-22k-384-finetuned-spiderTraining1000-1000",
-    "learning_rate": 5e-4,
-    "num_train_epochs":1,
-    "batch_size":16
-}
