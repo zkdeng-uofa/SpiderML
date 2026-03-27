@@ -1,0 +1,61 @@
+{
+    "experiment_id": "exp002",
+    "wandb_run_id": "xss8amf4",
+    "wandb_url": "https://wandb.ai/zkdeng-university-of-arizona/spidersML/runs/xss8amf4",
+    "date": "2025-03-25",
+    "description": "ConvNeXtV2-base pretrained on 1000 spider species, full fine-tune on 5 species subset",
+    "script": "scripts/huggingFaceTemplate.py",
+    "method": "full_finetune",
+    "hardware": {
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "gpu_memory_gb": 32,
+        "cuda_version": "12.8",
+        "pytorch_version": "2.10.0+cu128"
+    },
+    "config": {
+        "dataset": "zkdeng/spiderTraining5-100",
+        "model": "zkdeng/10-convnextv2-base-22k-384-finetuned-spiderTraining1000-1000",
+        "num_classes": 5,
+        "num_images_per_class": 100,
+        "learning_rate": 5e-05,
+        "num_train_epochs": 5,
+        "batch_size": 32,
+        "gradient_accumulation_steps": 1,
+        "effective_batch_size": 32,
+        "warmup_ratio": 0.1,
+        "lr_scheduler_type": "linear",
+        "weight_decay": 0.0,
+        "label_smoothing_factor": 0.0,
+        "bf16": true,
+        "torch_compile": true,
+        "seed": 42
+    },
+    "model_info": {
+        "architecture": "ConvNeXtV2ForImageClassification",
+        "total_params": 87697925,
+        "trainable_params": 87697925,
+        "trainable_pct": 100.0,
+        "freeze_through_stage": -1
+    },
+    "train_metrics": {
+        "train_runtime_sec": 50.4,
+        "train_samples_per_second": 39.38,
+        "train_loss": 0.5023
+    },
+    "eval_history": [
+        {"epoch": 1, "accuracy": 0.90, "f1": 0.9009, "precision": 0.9055, "recall": 0.90, "loss": 0.7989},
+        {"epoch": 2, "accuracy": 0.98, "f1": 0.9799, "precision": 0.9818, "recall": 0.98, "loss": 0.3053},
+        {"epoch": 3, "accuracy": 0.98, "f1": 0.9799, "precision": 0.9818, "recall": 0.98, "loss": 0.1627},
+        {"epoch": 4, "accuracy": 0.98, "f1": 0.9799, "precision": 0.9818, "recall": 0.98, "loss": 0.1173},
+        {"epoch": 5, "accuracy": 0.98, "f1": 0.9799, "precision": 0.9818, "recall": 0.98, "loss": 0.1059}
+    ],
+    "test_metrics": {
+        "accuracy": 0.96,
+        "f1": 0.9587,
+        "precision": 0.9636,
+        "recall": 0.96,
+        "loss": 0.307
+    },
+    "best_val_epoch": 2,
+    "notes": "Spider-pretrained backbone significantly outperforms ImageNet-only (96% vs 86% test). Val/test gap narrowed substantially."
+}

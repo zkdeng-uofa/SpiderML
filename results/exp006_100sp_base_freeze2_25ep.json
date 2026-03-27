@@ -1,0 +1,83 @@
+{
+    "experiment_id": "exp006",
+    "wandb_run_id": "5ciajlj6",
+    "wandb_url": "https://wandb.ai/zkdeng-university-of-arizona/spidersML/runs/5ciajlj6",
+    "date": "2025-03-26",
+    "description": "Partial freeze through stage 2: only stage 3 + classifier trainable (31.4% of params). Best result.",
+    "script": "scripts/huggingFacePartialFreeze.py",
+    "method": "partial_freeze",
+    "hardware": {
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "gpu_memory_gb": 32,
+        "cuda_version": "12.8",
+        "pytorch_version": "2.10.0+cu128"
+    },
+    "config": {
+        "dataset": "zkdeng/spiderTraining100-100",
+        "model": "zkdeng/10-convnextv2-base-22k-384-finetuned-spiderTraining1000-1000",
+        "num_classes": 100,
+        "num_images_per_class": 100,
+        "learning_rate": 5e-04,
+        "num_train_epochs": 25,
+        "batch_size": 32,
+        "gradient_accumulation_steps": 4,
+        "effective_batch_size": 128,
+        "warmup_ratio": 0.1,
+        "lr_scheduler_type": "linear",
+        "weight_decay": 0.0,
+        "label_smoothing_factor": 0.0,
+        "freeze_through_stage": 2,
+        "bf16": true,
+        "torch_compile": false,
+        "seed": 42
+    },
+    "model_info": {
+        "architecture": "ConvNeXtV2ForImageClassification",
+        "total_params": 87795300,
+        "trainable_params": 27569252,
+        "trainable_pct": 31.4,
+        "frozen_stages": "embeddings + stages 0-2",
+        "trainable_stages": "stage 3 + layernorm + classifier"
+    },
+    "train_metrics": {
+        "train_runtime_sec": 618.8,
+        "train_samples_per_second": null,
+        "train_loss": 0.3324
+    },
+    "eval_history": [
+        {"epoch": 1, "accuracy": 0.897, "f1": 0.8950, "precision": 0.9051, "recall": 0.897, "loss": 1.645},
+        {"epoch": 2, "accuracy": 0.957, "f1": 0.9555, "precision": 0.9627, "recall": 0.957, "loss": 0.1965},
+        {"epoch": 3, "accuracy": 0.960, "f1": 0.9590, "precision": 0.9648, "recall": 0.960, "loss": 0.1356},
+        {"epoch": 4, "accuracy": 0.967, "f1": 0.9670, "precision": 0.9694, "recall": 0.967, "loss": 0.1114},
+        {"epoch": 5, "accuracy": 0.963, "f1": 0.9629, "precision": 0.9659, "recall": 0.963, "loss": 0.1178},
+        {"epoch": 6, "accuracy": 0.974, "f1": 0.9740, "precision": 0.9771, "recall": 0.974, "loss": 0.1139},
+        {"epoch": 7, "accuracy": 0.967, "f1": 0.9662, "precision": 0.9697, "recall": 0.967, "loss": 0.1032},
+        {"epoch": 8, "accuracy": 0.963, "f1": 0.9621, "precision": 0.9657, "recall": 0.963, "loss": 0.1140},
+        {"epoch": 9, "accuracy": 0.963, "f1": 0.9628, "precision": 0.9663, "recall": 0.963, "loss": 0.1196},
+        {"epoch": 10, "accuracy": 0.964, "f1": 0.9632, "precision": 0.9663, "recall": 0.964, "loss": 0.1120},
+        {"epoch": 11, "accuracy": 0.972, "f1": 0.9720, "precision": 0.9740, "recall": 0.972, "loss": 0.1012},
+        {"epoch": 12, "accuracy": 0.966, "f1": 0.9657, "precision": 0.9683, "recall": 0.966, "loss": 0.1158},
+        {"epoch": 13, "accuracy": 0.969, "f1": 0.9688, "precision": 0.9718, "recall": 0.969, "loss": 0.1170},
+        {"epoch": 14, "accuracy": 0.969, "f1": 0.9687, "precision": 0.9711, "recall": 0.969, "loss": 0.1097},
+        {"epoch": 15, "accuracy": 0.973, "f1": 0.9726, "precision": 0.9746, "recall": 0.973, "loss": 0.1036},
+        {"epoch": 16, "accuracy": 0.971, "f1": 0.9708, "precision": 0.9728, "recall": 0.971, "loss": 0.0993},
+        {"epoch": 17, "accuracy": 0.972, "f1": 0.9719, "precision": 0.9743, "recall": 0.972, "loss": 0.1154},
+        {"epoch": 18, "accuracy": 0.971, "f1": 0.9709, "precision": 0.9729, "recall": 0.971, "loss": 0.1127},
+        {"epoch": 19, "accuracy": 0.970, "f1": 0.9698, "precision": 0.9717, "recall": 0.970, "loss": 0.1127},
+        {"epoch": 20, "accuracy": 0.967, "f1": 0.9667, "precision": 0.9685, "recall": 0.967, "loss": 0.1198},
+        {"epoch": 21, "accuracy": 0.970, "f1": 0.9699, "precision": 0.9722, "recall": 0.970, "loss": 0.1190},
+        {"epoch": 22, "accuracy": 0.970, "f1": 0.9699, "precision": 0.9722, "recall": 0.970, "loss": 0.1205},
+        {"epoch": 23, "accuracy": 0.971, "f1": 0.9708, "precision": 0.9726, "recall": 0.971, "loss": 0.1168},
+        {"epoch": 24, "accuracy": 0.972, "f1": 0.9719, "precision": 0.9740, "recall": 0.972, "loss": 0.1158},
+        {"epoch": 25, "accuracy": 0.971, "f1": 0.9709, "precision": 0.9728, "recall": 0.971, "loss": 0.1153}
+    ],
+    "test_metrics": {
+        "accuracy": 0.974,
+        "f1": 0.974,
+        "precision": 0.9771,
+        "recall": 0.974,
+        "loss": 0.1139
+    },
+    "best_val_epoch": 6,
+    "notes": "Best result across all experiments. Freezing stages 0-2 acted as regularization, preventing early-layer drift. Model converged faster (95.7% at epoch 2 vs 93.4% for full fine-tune). torch_compile disabled due to incompatibility with partial freeze (causes hangs). persistent_workers=True required to prevent dataloader deadlocks during checkpoint saves."
+}

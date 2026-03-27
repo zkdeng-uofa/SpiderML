@@ -1,0 +1,66 @@
+{
+    "experiment_id": "exp004",
+    "wandb_run_id": "o60ugr0w",
+    "wandb_url": "https://wandb.ai/zkdeng-university-of-arizona/spidersML/runs/o60ugr0w",
+    "date": "2025-03-26",
+    "description": "100 species, higher LR (5e-4), gradient accumulation 4, 10 epochs",
+    "script": "scripts/huggingFaceTemplate.py",
+    "method": "full_finetune",
+    "hardware": {
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "gpu_memory_gb": 32,
+        "cuda_version": "12.8",
+        "pytorch_version": "2.10.0+cu128"
+    },
+    "config": {
+        "dataset": "zkdeng/spiderTraining100-100",
+        "model": "zkdeng/10-convnextv2-base-22k-384-finetuned-spiderTraining1000-1000",
+        "num_classes": 100,
+        "num_images_per_class": 100,
+        "learning_rate": 5e-04,
+        "num_train_epochs": 10,
+        "batch_size": 32,
+        "gradient_accumulation_steps": 4,
+        "effective_batch_size": 128,
+        "warmup_ratio": 0.1,
+        "lr_scheduler_type": "linear",
+        "weight_decay": 0.0,
+        "label_smoothing_factor": 0.0,
+        "bf16": true,
+        "torch_compile": true,
+        "seed": 42
+    },
+    "model_info": {
+        "architecture": "ConvNeXtV2ForImageClassification",
+        "total_params": 87795300,
+        "trainable_params": 87795300,
+        "trainable_pct": 100.0,
+        "freeze_through_stage": -1
+    },
+    "train_metrics": {
+        "train_runtime_sec": 293.2,
+        "train_samples_per_second": 272.8,
+        "train_loss": 0.5017
+    },
+    "eval_history": [
+        {"epoch": 1, "accuracy": 0.928, "f1": 0.9273, "precision": 0.9384, "recall": 0.928, "loss": 0.3068},
+        {"epoch": 2, "accuracy": 0.931, "f1": 0.9304, "precision": 0.9368, "recall": 0.931, "loss": 0.2316},
+        {"epoch": 3, "accuracy": 0.938, "f1": 0.9374, "precision": 0.9443, "recall": 0.938, "loss": 0.2068},
+        {"epoch": 4, "accuracy": 0.939, "f1": 0.9380, "precision": 0.9444, "recall": 0.939, "loss": 0.2228},
+        {"epoch": 5, "accuracy": 0.942, "f1": 0.9425, "precision": 0.9489, "recall": 0.942, "loss": 0.1894},
+        {"epoch": 6, "accuracy": 0.946, "f1": 0.9456, "precision": 0.9521, "recall": 0.946, "loss": 0.1861},
+        {"epoch": 7, "accuracy": 0.940, "f1": 0.9391, "precision": 0.9445, "recall": 0.940, "loss": 0.2035},
+        {"epoch": 8, "accuracy": 0.955, "f1": 0.9536, "precision": 0.9583, "recall": 0.955, "loss": 0.1768},
+        {"epoch": 9, "accuracy": 0.956, "f1": 0.9556, "precision": 0.9587, "recall": 0.956, "loss": 0.1544},
+        {"epoch": 10, "accuracy": 0.957, "f1": 0.9564, "precision": 0.9596, "recall": 0.957, "loss": 0.1522}
+    ],
+    "test_metrics": {
+        "accuracy": 0.957,
+        "f1": 0.957,
+        "precision": 0.9616,
+        "recall": 0.957,
+        "loss": 0.1579
+    },
+    "best_val_epoch": 10,
+    "notes": "10x higher LR + grad accumulation improved test acc by 1.1% over exp003. Still improving at epoch 10."
+}

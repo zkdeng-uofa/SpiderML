@@ -1,0 +1,61 @@
+{
+    "experiment_id": "exp003",
+    "wandb_run_id": "w0zcy8kh",
+    "wandb_url": "https://wandb.ai/zkdeng-university-of-arizona/spidersML/runs/w0zcy8kh",
+    "date": "2025-03-25",
+    "description": "Scale to 100 species, ConvNeXtV2-base spider-pretrained, full fine-tune, low LR baseline",
+    "script": "scripts/huggingFaceTemplate.py",
+    "method": "full_finetune",
+    "hardware": {
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "gpu_memory_gb": 32,
+        "cuda_version": "12.8",
+        "pytorch_version": "2.10.0+cu128"
+    },
+    "config": {
+        "dataset": "zkdeng/spiderTraining100-100",
+        "model": "zkdeng/10-convnextv2-base-22k-384-finetuned-spiderTraining1000-1000",
+        "num_classes": 100,
+        "num_images_per_class": 100,
+        "learning_rate": 5e-05,
+        "num_train_epochs": 5,
+        "batch_size": 32,
+        "gradient_accumulation_steps": 1,
+        "effective_batch_size": 32,
+        "warmup_ratio": 0.1,
+        "lr_scheduler_type": "linear",
+        "weight_decay": 0.0,
+        "label_smoothing_factor": 0.0,
+        "bf16": true,
+        "torch_compile": true,
+        "seed": 42
+    },
+    "model_info": {
+        "architecture": "ConvNeXtV2ForImageClassification",
+        "total_params": 87795300,
+        "trainable_params": 87795300,
+        "trainable_pct": 100.0,
+        "freeze_through_stage": -1
+    },
+    "train_metrics": {
+        "train_runtime_sec": 208.4,
+        "train_samples_per_second": 191.9,
+        "train_loss": 1.154
+    },
+    "eval_history": [
+        {"epoch": 1, "accuracy": 0.880, "f1": 0.8776, "precision": 0.8958, "recall": 0.880, "loss": 1.554},
+        {"epoch": 2, "accuracy": 0.941, "f1": 0.9383, "precision": 0.9418, "recall": 0.941, "loss": 0.3978},
+        {"epoch": 3, "accuracy": 0.955, "f1": 0.9543, "precision": 0.9580, "recall": 0.955, "loss": 0.2597},
+        {"epoch": 4, "accuracy": 0.952, "f1": 0.9512, "precision": 0.9560, "recall": 0.952, "loss": 0.2233},
+        {"epoch": 5, "accuracy": 0.950, "f1": 0.9492, "precision": 0.9525, "recall": 0.950, "loss": 0.2120}
+    ],
+    "test_metrics": {
+        "accuracy": 0.946,
+        "f1": 0.9456,
+        "precision": 0.9511,
+        "recall": 0.946,
+        "loss": 0.2743
+    },
+    "best_val_epoch": 3,
+    "notes": "First 100-species run. Strong baseline at 94.6% test accuracy. Loss still decreasing at epoch 5."
+}
