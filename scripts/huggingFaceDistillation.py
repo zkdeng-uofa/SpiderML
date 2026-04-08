@@ -3,7 +3,7 @@ Fine-tune an image classifier using knowledge distillation from a teacher model.
 
 Uses the 1000-class pretrained teacher to provide soft label targets for the
 100-class student. The student learns from both hard labels (cross-entropy) and
-soft labels (KL divergence from teacher), with partial backbone freezing.
+soft labels (KL divergence from teacher), with a fully trainable student backbone.
 
 The teacher's soft outputs encode inter-species visual similarity that hard
 labels cannot capture, improving generalization on confusable species.
@@ -273,8 +273,8 @@ def main(config: ScriptTrainingArguments):
     ])
 
     # Split dataset: 80% train, 10% val, 10% test (stratified)
-    splits1 = dataset["train"].train_test_split(test_size=0.2, stratify_by_column="label")
-    splits2 = splits1["test"].train_test_split(test_size=0.5, stratify_by_column="label")
+    splits1 = dataset["train"].train_test_split(test_size=0.2, seed=42, stratify_by_column="label")
+    splits2 = splits1["test"].train_test_split(test_size=0.5, seed=42, stratify_by_column="label")
     train_ds = splits1["train"]
     val_ds = splits2["train"]
     test_ds = splits2["test"]
@@ -325,7 +325,7 @@ def main(config: ScriptTrainingArguments):
     # Convert teacher class indices to a tensor on the right device
     teacher_idx_tensor = torch.tensor(teacher_class_indices, dtype=torch.long, device=device)
 
-    # Training arguments (RTX 5090 optimized: bf16, no torch_compile with freeze)
+    # Training arguments (RTX 5090 optimized: bf16 + torch_compile)
     training_args = TrainingArguments(
         output_dir=output_dir,
         remove_unused_columns=False,
@@ -347,6 +347,7 @@ def main(config: ScriptTrainingArguments):
         dataloader_num_workers=4,
         dataloader_pin_memory=True,
         dataloader_persistent_workers=True,
+        torch_compile=True if config.freeze_through_stage < 0 else False,
     )
 
     # Build distillation trainer

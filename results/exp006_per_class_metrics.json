@@ -1,0 +1,706 @@
+{
+  "overall_accuracy": 0.968,
+  "overall_f1_macro": 0.9675993191534986,
+  "per_class": [
+    {
+      "species": "Anasaitis canosus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Anyphaena accentuata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Aphonopelma hentzi",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Araneus diadematus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Araneus quadratus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Araniella displicata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Argiope keyserlingi",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Austracantha minax",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Carrhotus xanthogramma",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Colonus sylvanus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Cyclosa conica",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Dolomedes albineus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Dolomedes scriptus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Dolomedes triton",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Ebrechtella tricuspidata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Enoplognatha ovata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Eriophora ravilla",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Eris militaris",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Evarcha arcuata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Gasteracantha cancriformis",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Hasarius adansoni",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Helpis minitabunda",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Hentzia mitrata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Hentzia palmarum",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Herpyllus ecclesiasticus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Heteropoda venatoria",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Hogna radiata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Holocnemus pluchei",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Kukulcania hibernalis",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Larinioides sclopetarius",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Latrodectus geometricus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Lyssomanes viridis",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Maevia inclemens",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Mangora acalypha",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Menemerus bivittatus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Menemerus semilimbatus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Micrathena gracilis",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Micrathena sagittata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Misumena vatia",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Neriene radiata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Nuctenea umbratica",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Oxyopes salticus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Phidippus audax",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Phidippus johnsoni",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Phidippus putnami",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Philaeus chrysops",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Philodromus dispar",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Pholcus phalangioides",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Pisaura mirabilis",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Pisaurina mira",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Platycryptus undatus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Rabidosa rabida",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Salticus scenicus",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Steatoda triangulosa",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Verrucosa arenata",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10.0
+    },
+    {
+      "species": "Agalenatea redii",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Araneus marmoreus",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Argiope aurantia",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Attulus fasciger",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Colonus hesperus",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Cyrtophora citricola",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Dysdera crocata",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Leucauge argyra",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Leucauge argyrobapta",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Marpissa muscosa",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Misumenoides formosipes",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Misumessus oblongus",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Neoscona crucifera",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Nesticodes rufipes",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Peucetia viridans",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Steatoda grossa",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Trichonephila clavata",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Zoropsis spinimana",
+      "precision": 0.9091,
+      "recall": 1.0,
+      "f1": 0.9524,
+      "support": 10.0
+    },
+    {
+      "species": "Argiope argentata",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Argiope bruennichi",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Argiope trifasciata",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Dolomedes tenebrosus",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Eratigena duellica",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Larinioides cornutus",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Leucauge venusta",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Maratus griseus",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Naphrys pulex",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Neoscona arabesca",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Nephila pilipes",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Parasteatoda tepidariorum",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Sassacus vitis",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Socca pustulosa",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Steatoda nobilis",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Zygiella x-notata",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10.0
+    },
+    {
+      "species": "Phidippus clarus",
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "support": 10.0
+    },
+    {
+      "species": "Trichonephila clavipes",
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "support": 10.0
+    },
+    {
+      "species": "Trichonephila edulis",
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "support": 10.0
+    },
+    {
+      "species": "Paraphidippus aurantius",
+      "precision": 0.9,
+      "recall": 0.9,
+      "f1": 0.9,
+      "support": 10.0
+    },
+    {
+      "species": "Plexippus paykulli",
+      "precision": 0.9,
+      "recall": 0.9,
+      "f1": 0.9,
+      "support": 10.0
+    },
+    {
+      "species": "Neoscona oaxacensis",
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.8889,
+      "support": 10.0
+    },
+    {
+      "species": "Thomisus onustus",
+      "precision": 1.0,
+      "recall": 0.7,
+      "f1": 0.8235,
+      "support": 10.0
+    },
+    {
+      "species": "Trichonephila plumipes",
+      "precision": 1.0,
+      "recall": 0.7,
+      "f1": 0.8235,
+      "support": 10.0
+    },
+    {
+      "species": "Latrodectus hesperus",
+      "precision": 0.75,
+      "recall": 0.9,
+      "f1": 0.8182,
+      "support": 10.0
+    },
+    {
+      "species": "Synema globosum",
+      "precision": 0.8,
+      "recall": 0.8,
+      "f1": 0.8,
+      "support": 10.0
+    },
+    {
+      "species": "Latrodectus mactans",
+      "precision": 0.875,
+      "recall": 0.7,
+      "f1": 0.7778,
+      "support": 10.0
+    }
+  ]
+}

@@ -1,15 +1,13 @@
 {
-    "dataset": "zkdeng/spiderTraining100-100",
+    "dataset": "zkdeng/ausSpiders",
     "model": "zkdeng/10-convnextv2-base-22k-384-finetuned-spiderTraining1000-1000",
     "learning_rate": 5e-4,
-    "num_train_epochs": 25,
+    "num_train_epochs": 10,
     "batch_size": 32,
     "gradient_accumulation_steps": 4,
     "warmup_ratio": 0.1,
     "seed": 42,
     "push_to_hub": false,
     "report_to": "wandb",
-    "freeze_through_stage": -1,
-    "distill_alpha": 0.5,
-    "distill_temperature": 3.0
+    "freeze_through_stage": 2
 }

@@ -198,8 +198,8 @@ def main(config: ScriptTrainingArguments):
     ])
 
     # Split dataset: 80% train, 10% val, 10% test (stratified)
-    splits1 = dataset["train"].train_test_split(test_size=0.2, stratify_by_column="label")
-    splits2 = splits1["test"].train_test_split(test_size=0.5, stratify_by_column="label")
+    splits1 = dataset["train"].train_test_split(test_size=0.2, seed=42, stratify_by_column="label")
+    splits2 = splits1["test"].train_test_split(test_size=0.5, seed=42, stratify_by_column="label")
     train_ds = splits1["train"]
     val_ds = splits2["train"]
     test_ds = splits2["test"]

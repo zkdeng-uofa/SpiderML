@@ -21,6 +21,7 @@ transformers = "*"
 datasets = "*"
 accelerate = "*"
 wandb = "*"
+matplotlib = "*"
 
 [tasks]
 train = "python scripts/huggingFaceTemplate.py --config configs/train_config.json"
