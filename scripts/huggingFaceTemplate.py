@@ -91,10 +91,12 @@ def main(config: ScriptTrainingArguments):
 
     # WandB setup (conditional on config.report_to)
     if config.report_to == "wandb":
-        wandb.login(key="e68d14a1a7b3aed71e0455589cde53c783018f5a")
+        wandb_key = os.environ.get("WANDB_API_KEY")
+        if wandb_key:
+            wandb.login(key=wandb_key)
         wandb.init(project="spidersML")
 
-    os.environ["HUGGINGFACE_TOKEN"] = "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"
+    hf_token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGINGFACE_TOKEN")
 
     model_checkpoint = config.model
 
@@ -186,7 +188,7 @@ def main(config: ScriptTrainingArguments):
         metric_for_best_model="accuracy",
         report_to=config.report_to,
         push_to_hub=config.push_to_hub,
-        hub_token="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",
+        hub_token=hf_token,
         bf16=True,
         dataloader_num_workers=4,
         dataloader_pin_memory=True,

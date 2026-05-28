@@ -173,6 +173,9 @@ output_logs
 old
 CLAUDE.md
 memory/
+docs
+.gitignore
+aranet.pdf
 
 # Pixi
 .pixi/
