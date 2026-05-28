@@ -225,65 +225,6 @@ The paper also reports AraNet accuracy of 99.54% on AusSpiders and 97.70% on Tai
 - Exact runtime depends strongly on GPU, driver, PyTorch build, storage, and dataset access speed.
 - Some external resources may require Hugging Face or W&B authentication.
 
-## Troubleshooting
-
-### CUDA is not available
-
-Run:
-
-```bash
-python - <<'PY'
-import torch
-print(torch.__version__)
-print(torch.cuda.is_available())
-print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else "no cuda")
-PY
-```
-
-If CUDA is unavailable, confirm that the NVIDIA driver is installed and that your PyTorch build supports your GPU/CUDA stack. The code can import on CPU, but full training is expected to require a GPU.
-
-### Hugging Face dataset or model cannot be downloaded
-
-Check network access and authentication:
-
-```bash
-huggingface-cli whoami
-```
-
-If needed:
-
-```bash
-huggingface-cli login
-```
-
-or set `HF_TOKEN`.
-
-### Weights & Biases prompts for login
-
-Either set:
-
-```bash
-export WANDB_API_KEY=...
-```
-
-or edit the config and use:
-
-```json
-"report_to": "none"
-```
-
-### GPU out-of-memory errors
-
-Reduce `batch_size` first. If you reduce `batch_size`, increase `gradient_accumulation_steps` if you want to preserve the same effective batch size. You can also reduce `num_train_epochs` for smoke tests.
-
-### Dataloader stalls on shared/HPC storage
-
-The scripts use multiple dataloader workers. If your filesystem or cluster environment stalls, reduce `dataloader_num_workers` in the script or run on local scratch storage.
-
-### Reproduced metrics differ slightly
-
-Small differences can occur because of GPU kernels, PyTorch/CUDA versions, image decoding, and nondeterministic operations. The scripts set the random seed, but bitwise reproducibility is not guaranteed across hardware and software stacks.
-
 ## Citation
 
 If you use this code, please cite the manuscript when it becomes available. Until publication, cite the repository and the submitted manuscript title:
@@ -295,7 +236,5 @@ for Spider Species Classification. Submitted to Arthropoda, 2026.
 
 ## Contact
 
-Zi Deng, Department of Electrical and Computer Engineering, The University of Arizona.
-
-For manuscript correspondence, use the contact information provided in the submitted paper.
+Zi Deng, zkdeng@arizona.edu, Department of Electrical and Computer Engineering, The University of Arizona.
 
