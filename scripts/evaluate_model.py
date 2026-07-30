@@ -1,3 +1,4 @@
+# 2026 Arizona Board of Regents on behalf of the University of Arizona. See LICENSE.txt for license information.
 """
 Evaluate a trained model on the test set, producing:
   - Confusion matrix heatmap (saved as PNG)

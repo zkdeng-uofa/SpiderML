@@ -1,3 +1,4 @@
+# 2026 Arizona Board of Regents on behalf of the University of Arizona. See LICENSE.txt for license information.
 """
 Fine-tune an image classifier with partial backbone freezing.
 
