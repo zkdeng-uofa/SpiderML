@@ -1,6 +1,6 @@
 # AraNet: A Two-Stage Convolutional Neural Network for Spider Species Classification
 
-Companion software for **AraNet: A Two-Stage Convolutional Neural Network for Spider Species Classification** by Zi Deng and Jeffrey J. Rodriguez. This repository is intended to make the analysis code, training configuration, and generated result summaries findable and reusable for peer review and publication. 
+Companion software for **AraNet: A Two-Stage Convolutional Neural Network for Spider Species Classification** by Zi Deng and Jeffrey J. Rodriguez. This repository is intended to make the analysis code, training configuration, and generated result summaries findable and reusable for peer review and publication under the research-only license described below.
 
 AraNet is a two-stage image-classification pipeline for spider species recognition. Stage 1 performs intermediate fine-tuning of a ConvNeXtV2-Base image classifier on a broad 1,000-species spider dataset. Stage 2 freezes the embedding layer and early ConvNeXtV2 encoder stages, and fine-tunes the later layers on a target species set.
 
@@ -8,21 +8,24 @@ AraNet is a two-stage image-classification pipeline for spider species recogniti
 
 ```text
 configs/      JSON configurations
-data/         CSV metadata
 images/       Generated paper figures
 results/      Experiment summaries and per-run metrics
 scripts/      Training, evaluation, and plotting scripts
 pixi.toml     Reproducible Pixi environment and task definitions
 environment.yml
               Conda environment file for FAIR-style installation
-LICENSE       MIT license for the software in this repository
+LICENSE       University of Arizona research-only software license
 ```
 
 ## Software License
 
-The software in this repository is released under the standard MIT License. The MIT License is a permissive open-source license that allows use, copying, modification, distribution, sublicensing, and sale of the software, provided that the copyright and license notices are preserved. It also disclaims warranty and liability. See [LICENSE](LICENSE).
+The software in this repository is shared under the license provided by Tech Launch Arizona / the University of Arizona. The copyright notice is assigned to:
 
-This license applies to the code and documentation in this repository. It does not change the terms of external datasets, pretrained model checkpoints, third-party Python packages, iNaturalist-hosted images, or journal article text outside this repository. Users are responsible for complying with the licenses and terms of those upstream resources.
+```text
+© 2026 Arizona Board of Regents on behalf of the University of Arizona.
+```
+
+The license permits use, copying, modification, merging, publication, and distribution of the software for research purposes only. It expressly states that no commercial use is granted. See [LICENSE](LICENSE) for the full license text.
 
 ## Data and Model Sources
 
@@ -237,4 +240,3 @@ for Spider Species Classification. Submitted to Arthropoda, 2026.
 ## Contact
 
 Zi Deng, zkdeng@arizona.edu, Department of Electrical and Computer Engineering, The University of Arizona.
-
