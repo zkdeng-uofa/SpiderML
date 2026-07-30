@@ -24,8 +24,7 @@ The software in this repository is shared under the license provided by Tech Lau
 ```text
 © 2026 Arizona Board of Regents on behalf of the University of Arizona.
 ```
-
-The license permits use, copying, modification, merging, publication, and distribution of the software for research purposes only. It expressly states that no commercial use is granted. See [LICENSE](LICENSE) for the full license text.
+ See [LICENSE](LICENSE) for the full license text.
 
 ## Data and Model Sources
 
